@@ -296,6 +296,9 @@ sub nslookup {
 	
 	open NSL, "/usr/bin/nslookup $interface 2>&1 |";
 	while (<NSL>) {
+                if (/$interface\s*canonical\s*name\s*=\s*(.+)\./) {
+                        $interface = $1;
+                }
 		if (/Name:\s*$interface/) {
 			$name_fl = 1;
 		}
